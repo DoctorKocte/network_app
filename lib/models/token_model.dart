@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'package:network_app/DTO/token_dto.dart';
 
 class TokenModel {
   String accessToken;
@@ -6,11 +6,10 @@ class TokenModel {
 
   TokenModel({required this.accessToken, required this.refreshToken});
 
-  factory TokenModel.fromJson(Map<String, dynamic> json) {
-    log('TOKEN MODEL: ${json}');
+  factory TokenModel.fromDTO({required TokenDTO dto}) {
     return TokenModel(
-      accessToken: json['accessToken'],
-      refreshToken: json['refreshToken']
+      accessToken: dto.accessToken,
+      refreshToken: dto.refreshToken
     );
   }
 }

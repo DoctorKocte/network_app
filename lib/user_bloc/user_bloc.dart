@@ -19,12 +19,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     } else {
       emit(UserLoadingState());
       try {
-        final users = await usersRepository.getAllUsers();
-        if (users.isEmpty) {
-          emit(UserEmptyState());
-        } else {
-          emit(UserDataState(userData: users));
-        }
+        final result = await usersRepository.getAllUsers();
+
+        result.fold(
+          (l) => emit(UserErrorState()),
+          (r) => emit(UserDataState(usersData: r))
+        );
+            // if (r.users.isEmpty) {
+            //   emit(UserEmptyState());
+            // } else {
+            //   emit(UserDataState(usersData: r));
+            // }
       } catch (e) {
         emit(UserErrorState());
       }

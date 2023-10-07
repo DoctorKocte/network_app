@@ -4,6 +4,8 @@ import 'package:network_app/user_bloc/user_bloc.dart';
 import 'package:network_app/user_bloc/user_event.dart';
 
 class ActionButtons extends StatelessWidget {
+  const ActionButtons({super.key});
+  
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
@@ -13,6 +15,7 @@ class ActionButtons extends StatelessWidget {
 
     final UserBloc userBloc = BlocProvider.of(context);
 
+    // Можно ли так делать или есть другой способ запустить загрузку при входе на экран?
     Future.delayed(Duration.zero, () => userBloc.add(UserLoadEvent()));
 
     return Padding(

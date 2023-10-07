@@ -15,13 +15,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
       if (event is AuthLoginEvent) {
-      emit(AuthLoadingState());
-      try {
-        final tokenModel = await usersRepository.login(username: event.username, password: event.password);
-        emit(AuthAuthorizedState(tokenModel: tokenModel));
-      } catch (e) {
-        emit(AuthErrorState(errorString: e.toString()));
-      }
+        emit(AuthLoadingState());
+        final result = await usersRepository.login(username: event.username, password: event.password);
+
+        result.fold(
+          (l) => emit(AuthErrorState(errorString: l)),
+          (r) => emit(AuthAuthorizedState(tokenModel: r)),
+        );
     }
   }
 }

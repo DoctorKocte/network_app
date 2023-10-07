@@ -2,44 +2,53 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
+import 'package:network_app/DTO/token_dto.dart';
+import 'package:network_app/DTO/users_dto.dart';
 import 'package:network_app/models/token_model.dart';
-import 'package:network_app/models/user_model.dart';
+import 'package:network_app/models/users_model.dart';
+import 'package:network_app/services/api_response_model.dart';
 import 'package:network_app/services/endpoint_config.dart';
+import 'package:dartz/dartz.dart';
 
 class UserProvider {
   EndpointConfig endpointConfig = EndpointConfig();
 
-  Future<List<User>> getUsers() async {
+  Future<Either<String, Users>> getUsers() async {
     final response = await http.get(Uri.parse(endpointConfig.getUsersEndpoint));
     log('${endpointConfig.getUsersEndpoint} ====> ${response.body}');
 
-    if (response.statusCode == 200) {
-      List<User> usersList = [];
-      final Map<String, dynamic> userJson = json.decode(response.body);
-      final data = userJson['data'];
-      final users = data['users'];
-      users.forEach((user) => usersList.add((User.fromJson(user) as User)));
-      return usersList;
+    var usersData = ApiResponse.parseBody(json.decode(response.body));
+    if (usersData.success) {
+      if (usersData.data != null) {
+        final usersDTO = UsersDTO.fromJson(usersData.data!);
+        final usersList = Users.fromDTO(usersDTO);
+        return Right(usersList);
+      } else {
+        return Right(Users(users: []));
+      }
     } else {
-      throw Exception('Error fetching users');
-    }
+      return Left(usersData.message ?? 'Error fetching users');
+    } 
   }
 
-  Future<TokenModel> login({required String username, required String password}) async {
+  Future<Either<String, TokenModel>> login({required String username, required String password}) async {
     final response = await http.post(
       Uri.parse(endpointConfig.loginEndpoint),
       body: {"username": username, "password": password}
     );
     log('${endpointConfig.loginEndpoint} ====> ${response.body}');
+    var tokenData = ApiResponse.parseBody(json.decode(response.body));
 
-    final Map<String, dynamic> userJson = json.decode(response.body);
-    if (userJson['data'] != null) {
-      final data = userJson['data'];
-      return TokenModel.fromJson(data);
-    } else if (userJson['message'] != null) {
-      throw Exception(userJson['message']);
+    if (tokenData.success) {
+      if (tokenData.data != null) {
+        final tokenDTO = TokenDTO.fromJson(tokenData.data!);
+        final tokenModel = TokenModel.fromDTO(dto: tokenDTO);
+        return Right(tokenModel);
+      } else {
+        return const Left('Error login');
+      }
     } else {
-      throw Exception('Error login');
+      return Left(tokenData.message ?? 'Error login: success: false');
     }
   }
 }

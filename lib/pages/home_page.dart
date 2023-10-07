@@ -20,9 +20,9 @@ class MyHomePage extends StatelessWidget {
           title: const Text('Users'),
           centerTitle: true,
           backgroundColor: Colors.transparent,
-          //automaticallyImplyLeading: false,
+          //automaticallyImplyLeading: false
         ),
-        body: Column(
+        body: const Column(
           children: [
             ActionButtons(),
             Expanded(

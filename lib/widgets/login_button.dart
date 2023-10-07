@@ -19,7 +19,6 @@ class LoginButton extends StatelessWidget {
       onTap: () { onPressed(); },
       child: Material(
         borderRadius: BorderRadius.circular(30),
-        //elevation: 4,
         child: Container(
           padding: const EdgeInsets.all(13),
           decoration: BoxDecoration(
