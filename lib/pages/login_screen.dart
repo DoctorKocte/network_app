@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/auth_bloc/auth_bloc.dart';
-import 'package:network_app/auth_bloc/auth_event.dart';
-import 'package:network_app/auth_bloc/auth_state.dart';
+import 'package:network_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:network_app/blocs/auth_bloc/auth_event.dart';
+import 'package:network_app/blocs/auth_bloc/auth_state.dart';
 import 'package:network_app/pages/home_page.dart';
 import 'package:network_app/services/user_repository.dart';
 import 'package:network_app/widgets/login_button.dart';

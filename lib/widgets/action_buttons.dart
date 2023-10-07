@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/user_bloc/user_bloc.dart';
-import 'package:network_app/user_bloc/user_event.dart';
+import 'package:network_app/blocs/user_bloc/user_bloc.dart';
+import 'package:network_app/blocs/user_bloc/user_event.dart';
 
 class ActionButtons extends StatelessWidget {
   const ActionButtons({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(

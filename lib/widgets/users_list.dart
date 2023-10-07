@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/user_bloc/user_bloc.dart';
-import 'package:network_app/user_bloc/user_state.dart';
+import 'package:network_app/blocs/user_bloc/user_bloc.dart';
+import 'package:network_app/blocs/user_bloc/user_state.dart';
 
 class UsersList extends StatelessWidget {
   const UsersList({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
