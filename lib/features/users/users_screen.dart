@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/blocs/user_bloc/user_bloc.dart';
+import 'package:network_app/features/users/action_buttons.dart';
+import 'package:network_app/features/users/user_bloc/user_bloc.dart';
+import 'package:network_app/features/users/users_list.dart';
 import 'package:network_app/services/user_repository.dart';
-import 'package:network_app/widgets/action_buttons.dart';
-import 'package:network_app/widgets/users_list.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -19,8 +19,7 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Users'),
           centerTitle: true,
-          backgroundColor: Colors.transparent,
-          //automaticallyImplyLeading: false
+          backgroundColor: Colors.transparent
         ),
         body: const Column(
           children: [

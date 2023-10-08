@@ -1,11 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/blocs/user_bloc/user_event.dart';
-import 'package:network_app/blocs/user_bloc/user_state.dart';
+import 'package:network_app/features/users/user_bloc/user_event.dart';
+import 'package:network_app/features/users/user_bloc/user_state.dart';
 import 'package:network_app/services/user_repository.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc({required this.usersRepository}) : super(UserEmptyState()) {
+  UserBloc({required this.usersRepository}) : super(UserLoadingState()) {
     on<UserEvent>(_onStarted);
+    add(UserLoadEvent());
   }
 
   final UserRepository usersRepository;
@@ -21,15 +22,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       try {
         final result = await usersRepository.getAllUsers();
 
+
         result.fold(
           (l) => emit(UserErrorState()),
           (r) => emit(UserDataState(usersData: r))
         );
-            // if (r.users.isEmpty) {
-            //   emit(UserEmptyState());
-            // } else {
-            //   emit(UserDataState(usersData: r));
-            // }
       } catch (e) {
         emit(UserErrorState());
       }

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:network_app/models/token_model.dart';
-import 'package:network_app/models/users_model.dart';
+import 'package:network_app/features/auth/models/token_model.dart';
+import 'package:network_app/features/users/models/users_model.dart';
 import 'package:network_app/services/user_api_provider.dart';
 
 class UserRepository {

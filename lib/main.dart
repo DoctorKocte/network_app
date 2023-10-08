@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:network_app/pages/login_screen.dart';
+import 'package:network_app/features/auth/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         pageTransitionsTheme: const PageTransitionsTheme(builders: {TargetPlatform.android: CupertinoPageTransitionsBuilder()})
       ),
-      home: LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }

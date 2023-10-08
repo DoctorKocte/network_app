@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/blocs/auth_bloc/auth_bloc.dart';
-import 'package:network_app/blocs/auth_bloc/auth_event.dart';
-import 'package:network_app/blocs/auth_bloc/auth_state.dart';
-import 'package:network_app/pages/home_page.dart';
+import 'package:network_app/features/auth/auth_bloc/auth_bloc.dart';
+import 'package:network_app/features/auth/auth_bloc/auth_event.dart';
+import 'package:network_app/features/auth/auth_bloc/auth_state.dart';
+import 'package:network_app/features/auth/login_button.dart';
+import 'package:network_app/features/auth/text_field.dart';
+import 'package:network_app/features/users/users_screen.dart';
 import 'package:network_app/services/user_repository.dart';
-import 'package:network_app/widgets/login_button.dart';
-import 'package:network_app/widgets/text_field.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final usersRepository = UserRepository();
+
+  String username = '';
+  String password = '';
+  bool isLoading = false;
+  ValueNotifier<bool> isLoginLoading = ValueNotifier(false);
+
+   @override
+   void dispose() {
+    isLoginLoading.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var username = '';
-    var password = '';
-
     return BlocProvider<AuthBloc>(
         create: (context) => AuthBloc(usersRepository: usersRepository),
         child: Scaffold(
@@ -34,7 +47,10 @@ class LoginScreen extends StatelessWidget {
                     textFieldTitle: 'Login',
                     //type: TextFieldType.username,
                     onChanged: (value) {
-                      username = value;
+                      // valuenotifier
+                      setState(() {
+                        username = value;
+                      });
                     },
                   ),
                   InputTextField(
@@ -42,43 +58,53 @@ class LoginScreen extends StatelessWidget {
                     //type: TextFieldType.password,
                     isObscureTextNeeded: true,
                     onChanged: (value) {
-                      password = value;
+                      setState(() {
+                        password = value;
+                      });
                     },
                   ),
                   const Spacer(),
-                  const LoginView(),
-                  Builder(builder: (context) {
+                  LoginView(isLoginLoading: isLoginLoading),
+                   ValueListenableBuilder(
+                    valueListenable: isLoginLoading,
+                    builder: (context, value, child) {
+                      return  Builder(builder: (context) {
                     return LoginButton(
                       buttonText: 'Login',
-                      isOutlined: true,
-                      onPressed: () {
-                        final AuthBloc authBloc = BlocProvider.of(context);
-                        authBloc.add(AuthLoginEvent(username: username, password: password));
-                      },
+                      isLoading: isLoginLoading.value,
+                      onPressed: () {                    
+                        if (isLoginLoading.value) {
+                          isLoginLoading.value = false;
+                        } else {
+                          isLoginLoading.value = true;
+                          final AuthBloc authBloc = BlocProvider.of(context);
+                          authBloc.add(AuthLoginEvent(username: username, password: password));
+                        }
+                      }
+                      ,
                     );
-                  })
+                  });
+                   },
+                ),
+                 
                 ]))));
   }
 }
 
 class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+  const LoginView({required this.isLoginLoading, super.key});
+
+  final ValueNotifier<bool> isLoginLoading;
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthAuthorizedState) {
+            isLoginLoading.value = false;
             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyHomePage()));
-          } else if (state is AuthLoadingState) {
-            // Не смогла разобраться, почему не отображается индикатор
-            // Вероятно потому что это BlocListener, а не BlocBuilder
-            // но в билдере не получается сделать открытие нового экрана
-
-            //Builder(builder: (context) { return
-            const Center(child: CircularProgressIndicator());
-            //});
           } else if (state is AuthErrorState) {
+            isLoginLoading.value = false;
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -96,13 +122,15 @@ class LoginView extends StatelessWidget {
             //     content: Text(state.errorString),
             //   ),
             // );
-          }
-        },
-        child: const Spacer());
+          } else {
+            isLoginLoading.value = true;
+          }},
+          child: const Spacer()
+        //}
+        // builder: (context, state) {
+        //   isLoginLoading.value = state is AuthLoadingState;
+        //   return const Spacer();
+        // }
+      );    
   }
 }
-
-   //       AuthLoadingState() => CircularProgressIndicator(),
-   //       AuthAuthorizedState() => MyHomePage(), ???
-   //       AuthUnauthorizedState() => Container(),
-   //       AuthErrorState() => Center(child: Text('error'),)

@@ -1,4 +1,4 @@
-import 'package:network_app/models/users_model.dart';
+import 'package:network_app/features/users/models/users_model.dart';
 
 sealed class UserState {
   const UserState();

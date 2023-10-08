@@ -1,5 +1,5 @@
-import 'package:network_app/DTO/users_dto.dart';
-import 'package:network_app/models/user_model.dart';
+import 'package:network_app/features/users/dto/users_dto.dart';
+import 'package:network_app/features/users/models/user_model.dart';
 
 class Users {
   Users({required this.users});

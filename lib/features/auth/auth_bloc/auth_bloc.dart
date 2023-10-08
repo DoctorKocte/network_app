@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/blocs/auth_bloc/auth_event.dart';
-import 'package:network_app/blocs/auth_bloc/auth_state.dart';
+import 'package:network_app/features/auth/auth_bloc/auth_event.dart';
+import 'package:network_app/features/auth/auth_bloc/auth_state.dart';
 import 'package:network_app/services/user_repository.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {

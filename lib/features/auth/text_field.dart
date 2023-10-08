@@ -53,6 +53,7 @@ class _InputTextFieldState extends State<InputTextField> {
             ),
             controller: _controller,
             onChanged: widget.onChanged,
+            //inputFormatters: [],
             // Не смогла разобраться с валидацией до конца
             // _formKey.currentState!.validate(); },
             // _formKey.currentState!.validate() ? widget.onChanged : ((_) {}),

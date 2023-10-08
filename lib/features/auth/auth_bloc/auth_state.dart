@@ -1,4 +1,4 @@
-import 'package:network_app/models/token_model.dart';
+import 'package:network_app/features/auth/models/token_model.dart';
 
 sealed class AuthState {
   const AuthState();

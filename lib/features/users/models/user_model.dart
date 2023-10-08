@@ -1,4 +1,4 @@
-import 'package:network_app/DTO/user_dto.dart';
+import 'package:network_app/features/users/dto/user_dto.dart';
 
 class User {
   User({

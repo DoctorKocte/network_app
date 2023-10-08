@@ -3,10 +3,10 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
-import 'package:network_app/DTO/token_dto.dart';
-import 'package:network_app/DTO/users_dto.dart';
-import 'package:network_app/models/token_model.dart';
-import 'package:network_app/models/users_model.dart';
+import 'package:network_app/features/auth/dto/token_dto.dart';
+import 'package:network_app/features/auth/models/token_model.dart';
+import 'package:network_app/features/users/dto/users_dto.dart';
+import 'package:network_app/features/users/models/users_model.dart';
 import 'package:network_app/services/api_response_model.dart';
 import 'package:network_app/services/endpoint_config.dart';
 
