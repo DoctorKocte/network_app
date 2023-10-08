@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 //enum TextFieldType { username, password }
 
 class InputTextField extends StatefulWidget {
-  const InputTextField(
-      {required this.textFieldTitle,
-      //required this.type,
-      this.isObscureTextNeeded = false,
+  const InputTextField({
+      required this.textFieldTitle,
       required this.onChanged,
-      super.key});
+       //required this.type,
+      this.isObscureTextNeeded = false,
+      super.key
+    });
 
   final String textFieldTitle;
   //final TextFieldType type;

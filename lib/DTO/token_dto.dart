@@ -1,9 +1,6 @@
 import 'dart:developer';
 
 class TokenDTO {
-  String accessToken;
-  String refreshToken;
-
   TokenDTO({required this.accessToken, required this.refreshToken});
 
   factory TokenDTO.fromJson(Map<String, dynamic> json) {
@@ -13,4 +10,7 @@ class TokenDTO {
       refreshToken: json['refreshToken']
     );
   }
+
+  String accessToken;
+  String refreshToken;
 }

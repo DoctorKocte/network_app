@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({
+      required this.buttonText, 
+      required this.onPressed, 
       super.key,
-      required this.buttonText,
-      this.isOutlined = false,
-      required this.onPressed
+      this.isOutlined = false
     });
 
   final String buttonText;
   final bool isOutlined;
-  final Function onPressed;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return 
      GestureDetector(
-      onTap: () { onPressed(); },
+      onTap: onPressed,
       child: Material(
         borderRadius: BorderRadius.circular(30),
         child: Container(

@@ -2,10 +2,10 @@ enum ApiService {
     getUsers,
     login;
 
-    String get baseEndpoint => "https://super-mybg.onrender.com";
+    String get baseEndpoint => 'https://super-mybg.onrender.com';
 
     String get endpoint {
-      String auth = '/auth';
+      const auth = '/auth';
       switch (this) {
         case ApiService.getUsers:
           return '$baseEndpoint$auth/users';

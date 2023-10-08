@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/services/user_repository.dart';
 import 'package:network_app/blocs/user_bloc/user_event.dart';
 import 'package:network_app/blocs/user_bloc/user_state.dart';
+import 'package:network_app/services/user_repository.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final UserRepository usersRepository;
-
   UserBloc({required this.usersRepository}) : super(UserEmptyState()) {
     on<UserEvent>(_onStarted);
   }
+
+  final UserRepository usersRepository;
 
   Future<void> _onStarted(
     UserEvent event,

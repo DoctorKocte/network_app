@@ -1,12 +1,6 @@
 import 'package:network_app/DTO/user_dto.dart';
 
 class User {
-  String id;
-  String firstName;
-  String lastName;
-  String? phoneNumber;
-  String? imageString;
-
   User({
     required this.id, 
     required this.firstName, 
@@ -24,4 +18,10 @@ class User {
         imageString: dto.imageString
     );
   }
+
+  String id;
+  String firstName;
+  String lastName;
+  String? phoneNumber;
+  String? imageString;
 }

@@ -4,11 +4,11 @@ import 'package:network_app/blocs/auth_bloc/auth_state.dart';
 import 'package:network_app/services/user_repository.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final UserRepository usersRepository;
-
   AuthBloc({required this.usersRepository}) : super(AuthLoadingState()) {
     on<AuthEvent>(_login);
   }
+
+  final UserRepository usersRepository;
 
   Future<void> _login(
     AuthEvent event,

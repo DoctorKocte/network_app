@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:network_app/services/user_repository.dart';
 import 'package:network_app/blocs/user_bloc/user_bloc.dart';
+import 'package:network_app/services/user_repository.dart';
 import 'package:network_app/widgets/action_buttons.dart';
 import 'package:network_app/widgets/users_list.dart';
 

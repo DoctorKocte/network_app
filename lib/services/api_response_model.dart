@@ -1,8 +1,4 @@
 class ApiResponse {
-  bool success;
-  Map<String, dynamic>? data;
-  String? message;
-
   ApiResponse({required this.success, this.data, this.message});
 
   factory ApiResponse.parseBody(Map<String, dynamic> data) {
@@ -12,4 +8,8 @@ class ApiResponse {
       message: data['message']
     );
   }
+
+  bool success;
+  Map<String, dynamic>? data;
+  String? message;
 }

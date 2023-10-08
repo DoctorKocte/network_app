@@ -9,8 +9,8 @@ class UserEmptyState extends UserState {}
 class UserLoadingState extends UserState {}
 
 class UserDataState extends UserState {
-  Users usersData;
   UserDataState({required this.usersData});
+  Users usersData;
 }
 
 class UserErrorState extends UserState {}

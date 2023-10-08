@@ -15,8 +15,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String username = "";
-    String password = "";
+    var username = '';
+    var password = '';
 
     return BlocProvider<AuthBloc>(
         create: (context) => AuthBloc(usersRepository: usersRepository),

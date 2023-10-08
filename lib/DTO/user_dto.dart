@@ -1,13 +1,6 @@
 import 'dart:developer';
 
 class UserDTO {
-  String id;
-  String username;
-  String? firstName;
-  String? lastName;
-  String? phoneNumber;
-  String? imageString;
-
   UserDTO({
     required this.id, 
     required this.username,
@@ -28,4 +21,11 @@ class UserDTO {
       imageString: json['imageString']
     );
   }
+
+  String id;
+  String username;
+  String? firstName;
+  String? lastName;
+  String? phoneNumber;
+  String? imageString;
 }

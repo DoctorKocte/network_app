@@ -8,7 +8,7 @@ class ActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(
+    final style = ElevatedButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
         foregroundColor: Colors.white,
         backgroundColor: const Color.fromARGB(255, 136, 22, 207));

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:network_app/DTO/token_dto.dart';
 import 'package:network_app/DTO/users_dto.dart';
@@ -8,7 +9,6 @@ import 'package:network_app/models/token_model.dart';
 import 'package:network_app/models/users_model.dart';
 import 'package:network_app/services/api_response_model.dart';
 import 'package:network_app/services/endpoint_config.dart';
-import 'package:dartz/dartz.dart';
 
 class UserProvider {
   EndpointConfig endpointConfig = EndpointConfig();
@@ -17,7 +17,7 @@ class UserProvider {
     final response = await http.get(Uri.parse(endpointConfig.getUsersEndpoint));
     log('${endpointConfig.getUsersEndpoint} ====> ${response.body}');
 
-    var usersData = ApiResponse.parseBody(json.decode(response.body));
+    final usersData = ApiResponse.parseBody(json.decode(response.body));
     if (usersData.success) {
       if (usersData.data != null) {
         final usersDTO = UsersDTO.fromJson(usersData.data!);
@@ -32,12 +32,13 @@ class UserProvider {
   }
 
   Future<Either<String, TokenModel>> login({required String username, required String password}) async {
+    log('login pressed');
     final response = await http.post(
       Uri.parse(endpointConfig.loginEndpoint),
-      body: {"username": username, "password": password}
+      body: {'username': username, 'password': password}
     );
     log('${endpointConfig.loginEndpoint} ====> ${response.body}');
-    var tokenData = ApiResponse.parseBody(json.decode(response.body));
+    final tokenData = ApiResponse.parseBody(json.decode(response.body));
 
     if (tokenData.success) {
       if (tokenData.data != null) {

@@ -7,11 +7,13 @@ sealed class AuthState {
 class AuthLoadingState extends AuthState {}
 
 class AuthAuthorizedState extends AuthState {
-  TokenModel tokenModel;
   AuthAuthorizedState({required this.tokenModel});
+
+  TokenModel tokenModel;  
 }
 
 class AuthErrorState extends AuthState {
-  String errorString;
   AuthErrorState({required this.errorString});
+
+  String errorString;
 }
